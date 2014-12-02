@@ -5,6 +5,15 @@ def get_response(input)
   response.nil? ? 'sorry?' : response % { c1: $1, c2: $2}
 end
 
+def ask_user
+	print "User: "
+	gets.chomp
+end
+
+def bot_response(response)
+	puts "Chatbot: #{response}"
+end
+
 RESPONSES = { 'goodbye' => 'bye', 
               'sayonara' => 'sayonara', 
               'the weather is (.*)' => 'I hate it when it\'s %{c1}', 
@@ -18,14 +27,15 @@ RESPONSES = { 'goodbye' => 'bye',
           }
 
 puts "Hello, what's your name?"
+print "User: "
 name = gets.chomp
-puts "Hello #{name}"
-while(input = gets.chomp) do
+bot_response("Hello #{name}")
+while(input = ask_user) do
 	if input == "quit"
 		puts "Thanks for chatting with Chatbot!"
 		exit
 	else
-  		puts get_response(input)
+  		bot_response("#{get_response(input)}")
   	end
 
 end
