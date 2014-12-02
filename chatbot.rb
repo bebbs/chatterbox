@@ -12,7 +12,9 @@ RESPONSES = { 'goodbye' => 'bye',
               'I groove to (.*) and (.*)' => 'I love %{c1} but I hate %{c2}',
               'Where are you?' => 'I am at Old Street Station',
               'What is your name?' => 'My name is ChatBot',
-              'Who created you?' => 'Makers Academy created me'
+              'Who created you?' => 'Makers Academy created me',
+              'My favourite programming language is (.*)' => 'I quite like %{c1} - I was coded in Ruby!',
+              'Do you prefer (.*) or (.*) ?' => '%{c1} is alright, but %{c2} is my favourite.'
           }
 
 puts "Hello, what's your name?"
