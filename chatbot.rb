@@ -14,6 +14,16 @@ def bot_response(response)
 	puts "Chatbot: #{response}"
 end
 
+def add_response
+	puts "What question would you like to add?: "
+	q = gets.chomp
+	puts "What response would you like for '#{q}'?"
+	a = gets.chomp
+	RESPONSES[q] = []
+	RESPONSES[q] << [a]
+end
+
+
 RESPONSES = { 'goodbye' => 'bye', 
               'sayonara' => 'sayonara', 
               'the weather is (.*)' => 'I hate it when it\'s %{c1}', 
@@ -35,6 +45,8 @@ while(input = ask_user) do
 	if input == "quit"
 		puts "Thanks for chatting with Chatbot!"
 		exit
+	elsif input == "Add a response"
+		add_response
 	else
   		bot_response("#{get_response(input)}")
   	end
