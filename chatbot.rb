@@ -2,7 +2,7 @@ def get_response(input)
   key = RESPONSES.keys.select {|k| /#{k}/ =~ input }.sample
   /#{key}/ =~ input
   response = RESPONSES[key]
-  response.nil? ? 'sorry?' : response % { c1: $1, c2: $2}
+  response.nil? ? 'sorry?' : response % { c1: $1, c2: $2, c3: $3, c4: $4}
 end
 
 def ask_user
@@ -23,7 +23,8 @@ RESPONSES = { 'goodbye' => 'bye',
               'What is your name?' => 'My name is ChatBot',
               'Who created you?' => 'Makers Academy created me',
               'My favourite programming language is (.*)' => 'I quite like %{c1} - I was coded in Ruby!',
-              'Do you prefer (.*) or (.*) ?' => '%{c1} is alright, but %{c2} is my favourite.'
+              'Do you prefer (.*) or (.*) ?' => '%{c1} is alright, but %{c2} is my favourite.',
+              'My favourite songs are (.*), (.*), and (.*)' => '%{c1} is okay, %{c3} is very good, but %{c2} sounds awful!'
           }
 
 puts "Hello, what's your name?"
