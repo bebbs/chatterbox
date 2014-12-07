@@ -25,7 +25,10 @@ end
 
 def save_questions
     file = File.open("questions.csv", "w")
-    file.puts RESPONSES
+    RESPONSES.each do |key, value|
+        file.print "['#{key}', "
+        file.puts "'#{value}']"
+    end
     file.close
     puts "Questions have been saved to questions.csv!"
 end
