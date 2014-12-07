@@ -8,6 +8,7 @@ I adapted a basic chatbot program to add more functionality, for example:
 * Implemented a 'quit' command to exit the program.
 * Created a distinction between user input and chatbot response.
 * Defined an add_response method to add new custom inputs and responses from within the program, instead of hardcoding them.
+* Implemented saving new responses to a file 'questions.csv'.
 
 Still to do
 -----------
