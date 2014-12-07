@@ -1,7 +1,10 @@
+require 'colorize'
+
 # Create an empty hash to contain questions and responses.
 RESPONSES = {}
 
-# get_response is a method to select the correct response for each input, including 4 regex capture groups.
+# get_response is a method to select the correct response for each
+# input, including 4 regex capture groups.
 def get_response(input)
     key = RESPONSES.keys.select {|k| /#{k}/ =~ input }.sample
     /#{key}/ =~ input
@@ -11,7 +14,7 @@ end
 
 # ask_user and bot_response handle getting user input and displaying the response. 
 def ask_user
-	print "User: "
+	print "User: ".blue
 	gets.chomp
 end
 
@@ -21,12 +24,14 @@ end
 
 # add_response allows you to add custom questions and set a response from the chatbot.
 def add_response
-	puts "What question would you like to add?: "
+    puts "==== RESPONSE CREATOR ====".yellow
+	puts "What question would you like to add?: ".yellow
 	q = gets.chomp
-	puts "What response would you like for '#{q}'?"
+	puts "What response would you like for '#{q}'?".yellow
 	a = gets.chomp
 	RESPONSES[q] = a
-    puts "Response added!"
+    puts "Response added!".yellow
+    puts "=========================".yellow
     puts ""
 end
 
@@ -68,7 +73,7 @@ end
 # Begins the program by learning the users name.
 def say_hello
     puts "Hello, what's your name?"
-    print "User: "
+    print "User: ".blue
     name = gets.chomp
     bot_response("Hello #{name}")
 end
