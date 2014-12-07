@@ -19,8 +19,8 @@ def add_response
 	q = gets.chomp
 	puts "What response would you like for '#{q}'?"
 	a = gets.chomp
-	RESPONSES[q] = []
-	RESPONSES[q] << [a]
+	RESPONSES[q] = a
+  puts "Response added!"
 end
 
 
@@ -48,8 +48,8 @@ while(input = ask_user) do
 	elsif input == "Add a response"
 		add_response
 	else
-  		bot_response("#{get_response(input)}")
-  	end
+  	bot_response("#{get_response(input)}")
+  end
 
 end
 
