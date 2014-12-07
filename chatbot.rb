@@ -1,8 +1,8 @@
 def get_response(input)
-  key = RESPONSES.keys.select {|k| /#{k}/ =~ input }.sample
-  /#{key}/ =~ input
-  response = RESPONSES[key]
-  response.nil? ? 'sorry?' : response % { c1: $1, c2: $2, c3: $3, c4: $4}
+    key = RESPONSES.keys.select {|k| /#{k}/ =~ input }.sample
+    /#{key}/ =~ input
+    response = RESPONSES[key]
+    response.nil? ? 'sorry?' : response % { c1: $1, c2: $2, c3: $3, c4: $4}
 end
 
 def ask_user
@@ -20,7 +20,20 @@ def add_response
 	puts "What response would you like for '#{q}'?"
 	a = gets.chomp
 	RESPONSES[q] = a
-  puts "Response added!"
+    puts "Response added!"
+end
+
+def save_questions
+    file = File.open("questions.csv", "w")
+    file.puts RESPONSES
+    file.close
+    puts "Questions have been saved to questions.csv!"
+end
+
+def save_and_quit
+    puts "Thanks for chatting with chatbot!"
+    save_questions
+    exit
 end
 
 
@@ -43,8 +56,7 @@ name = gets.chomp
 bot_response("Hello #{name}")
 while(input = ask_user) do
 	if input == "quit"
-		puts "Thanks for chatting with Chatbot!"
-		exit
+        save_and_quit
 	elsif input == "Add a response"
 		add_response
 	else
