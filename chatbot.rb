@@ -1,3 +1,5 @@
+RESPONSES = {}
+
 def get_response(input)
     key = RESPONSES.keys.select {|k| /#{k}/ =~ input }.sample
     /#{key}/ =~ input
@@ -23,11 +25,24 @@ def add_response
     puts "Response added!"
 end
 
+def get_difference?(hash1, hash2)
+    difference = {}
+end
+
+def load_questions
+    file = File.open("questions.csv", "r")
+    file.readlines.each do |line|
+        key, value = line.chomp.split(" | ")
+        RESPONSES[key] = value
+    end
+    puts "Questions and responses loaded!"
+    puts ""
+end
+
 def save_questions
     file = File.open("questions.csv", "w")
     RESPONSES.each do |key, value|
-        file.print "['#{key}', "
-        file.puts "'#{value}']"
+        file.puts key + " | " + value
     end
     file.close
     puts "Questions have been saved to questions.csv!"
@@ -39,32 +54,26 @@ def save_and_quit
     exit
 end
 
-
-RESPONSES = { 'goodbye' => 'bye', 
-              'sayonara' => 'sayonara', 
-              'the weather is (.*)' => 'I hate it when it\'s %{c1}', 
-              'I love (.*)' => 'I love %{c1} too', 
-              'I groove to (.*) and (.*)' => 'I love %{c1} but I hate %{c2}',
-              'Where are you?' => 'I am at Old Street Station',
-              'What is your name?' => 'My name is ChatBot',
-              'Who created you?' => 'Makers Academy created me',
-              'My favourite programming language is (.*)' => 'I quite like %{c1} - I was coded in Ruby!',
-              'Do you prefer (.*) or (.*) ?' => '%{c1} is alright, but %{c2} is my favourite.',
-              'My favourite songs are (.*), (.*), and (.*)' => '%{c1} is okay, %{c3} is very good, but %{c2} sounds awful!'
-          }
-
-puts "Hello, what's your name?"
-print "User: "
-name = gets.chomp
-bot_response("Hello #{name}")
-while(input = ask_user) do
-	if input == "quit"
-        save_and_quit
-	elsif input == "Add a response"
-		add_response
-	else
-  	bot_response("#{get_response(input)}")
-  end
-
+def program_loop
+    puts "Hello, what's your name?"
+    print "User: "
+    name = gets.chomp
+    bot_response("Hello #{name}")
+    while(input = ask_user) do
+    	if input == "quit"
+            save_and_quit
+    	elsif input == "Add a response"
+    		add_response
+    	else
+      	    bot_response("#{get_response(input)}")
+        end
+    end
 end
+
+def start_program
+    load_questions
+    program_loop
+end
+
+start_program
 

@@ -1,0 +1,15 @@
+goodbye | bye
+sayonara | sayonara
+the weather is (.*) | I hate it when it's %{c1}
+I love (.*) | I love %{c1} too
+I groove to (.*) and (.*) | I love %{c1} but I hate %{c2}
+Where are you? | I am at Old Street Station
+What is your name? | My name is ChatBot
+Who created you? | Makers Academy created me
+My favourite programming language is (.*) | I quite like %{c1} - I was coded in Ruby!
+Do you prefer (.*) or (.*) ? | %{c1} is alright, but %{c2} is my favourite.
+My favourite songs are (.*), (.*), and (.*) | %{c1} is okay, %{c3} is very good, but %{c2} sounds awful!
+AAA | BBB
+AAAAAA | BBB
+CCC | DDD
+EEE | DDD
