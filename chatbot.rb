@@ -1,4 +1,5 @@
 require 'colorize'
+require 'csv'
 
 # Create an empty hash to contain questions and responses.
 RESPONSES = {}
@@ -19,20 +20,19 @@ def ask_user
 end
 
 def bot_response(response)
-	puts "Chatbot: #{response}"
+	puts "Chatbot: #{response}".green
 end
 
 # add_response allows you to add custom questions and set a response from the chatbot.
 def add_response
-    puts "==== RESPONSE CREATOR ====".yellow
-	puts "What question would you like to add?: ".yellow
-	q = gets.chomp
-	puts "What response would you like for '#{q}'?".yellow
-	a = gets.chomp
+    puts "===== ADD A NEW INPUT/RESPONSE =====".yellow
+    puts "What question would you like to add?: ".yellow
+    q = gets.chomp
+    puts "What response would you like for #{q}?: ".yellow
+    a = gets.chomp
 	RESPONSES[q] = a
     puts "Response added!".yellow
-    puts "=========================".yellow
-    puts ""
+    puts "==================================".yellow
 end
 
 # Single responsibility method to open a file in either read or write mode.
@@ -43,9 +43,9 @@ end
 # Loads questions.csv in read mode, iterates through and splits each line into 
 # key => value, then pushes the pair into the RESPONSES hash.
 def load_questions
-    file_handler("questions.csv", "r")
-    @file.readlines.each do |line|
-        key, value = line.chomp.split(" | ")
+    CSV.foreach("questions.csv", { :col_sep => ' | ' }) do |row|
+        key = row[0]
+        value = row[1]
         RESPONSES[key] = value
     end
     puts "Questions and responses loaded!"
@@ -54,6 +54,7 @@ end
 
 # Opens questions.csv in write mode, then appends each key => value pair 
 # to the file, split with ' | '. 
+
 def save_questions
     file_handler("questions.csv", "w")
     RESPONSES.each do |key, value|
